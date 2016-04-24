@@ -55,18 +55,22 @@ export function createMatcher(language: string): IMatcher {
                     return c;
                 },
                 gen_getter: (item: IFar) => {
-                    return '\n\tpublic get ' + item.figure + '(): ' + item.typeName + ' {\n' +
+                    return '\n\tpublic get' + item.figure + '(): ' + item.typeName + ' {\n' +
                         '\t\treturn this.' + item.name + ';\n' +
                         '\t}\n';
                 },
                 gen_setter: (item: IFar) => {
-                    return '\n\tpublic set ' + item.figure + '(value: ' + item.typeName + ') {\n' +
+                    return '\n\tpublic set' + item.figure + '(value: ' + item.typeName + ') {\n' +
                         '\t\tthis.' + item.name + ' = value;\n' +
                         '\t}\n';
                 },
                 figure: (fname: string) => {
-                    if (fname.startsWith('_')) return fname.substring(1);
-                    return '$' + fname;
+                    if (fname.startsWith('_')) {
+                        return fname.substring(1);
+                    } else {
+                        return fname.charAt(0).toUpperCase()+fname.substring(1);
+                    }
+                    
                 }
             }
         // add your own list of regex / building blocks for other languages
